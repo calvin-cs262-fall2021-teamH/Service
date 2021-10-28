@@ -10,26 +10,26 @@ DROP TABLE IF EXISTS PointOfInterest;
 
 -- Create the schema.
 CREATE TABLE Person (
-	ID SERIAL PRIMARY KEY,
-	email varchar(50),
+    ID SERIAL PRIMARY KEY,
+    email varchar(50),
     name varchar(50)
-	);
+    );
 
 CREATE TABLE PointOfInterest (
-	ID SERIAL PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     latitude float NOT NULL,
     longitude float NOT NULL,
     radius integer,
     name varchar(50),
     info varchar(1000),
     imageURL varchar(50)
-	);
+    );
 
 CREATE TABLE Question (
     ID SERIAL PRIMARY KEY,
     pointID integer REFERENCES PointOfInterest(ID),
     question varchar (1000)
-	);
+    );
 
 CREATE TABLE Answer (
     personID integer REFERENCES Person(ID),

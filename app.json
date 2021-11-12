@@ -1,0 +1,6 @@
+{
+  "name": "Start on Heroku: helloCampusService.js",
+  "description": "Hello Campus webservice",
+  "repository": "https://github.com/calvin-cs262-fall2021-teamH/Service",
+  "image": "heroku/nodejs"
+}

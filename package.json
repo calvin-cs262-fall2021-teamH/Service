@@ -1,0 +1,19 @@
+{
+  "name": "hello-campus",
+  "version": "1.0.0",
+  "description": "Hello Campus Webservice",
+  "main": "helloCampusService.js",
+  "author": "teamhuh",
+  "license": "ISC",
+  "engines": {
+    "node": "12.x"
+  },
+  "scripts": {
+    "start": "node helloCampusService.js",
+    "start-direct": "node helloCampusDirect.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg-promise": "^10.7.1"
+  }
+}

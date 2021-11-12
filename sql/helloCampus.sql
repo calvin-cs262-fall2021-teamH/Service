@@ -7,24 +7,16 @@ DROP TABLE IF EXISTS Answer;
 DROP TABLE IF EXISTS Question;
 DROP TABLE IF EXISTS Person;
 DROP TABLE IF EXISTS PointOfInterest;
-go
-use master 
-go
-Drop database if exists HelloCampus;
-Create Database HelloCampus;
-use HelloCampus
-go
 
 -- Create the schema.
 CREATE TABLE Person (
-    ID int identity PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     email varchar(50),
-	password varchar(250),
-    name varchar(250)
+    name varchar(50)
     );
 
 CREATE TABLE PointOfInterest (
-    pointID int identity PRIMARY KEY,
+    ID SERIAL PRIMARY KEY,
     latitude float NOT NULL,
     longitude float NOT NULL,
     radius integer,
@@ -34,14 +26,14 @@ CREATE TABLE PointOfInterest (
     );
 
 CREATE TABLE Question (
-    questionID  int identity PRIMARY KEY,
-    pointID integer REFERENCES PointOfInterest(pointID),
+    ID SERIAL PRIMARY KEY,
+    pointID integer REFERENCES PointOfInterest(ID),
     question varchar (1000)
     );
 
 CREATE TABLE Answer (
     personID integer REFERENCES Person(ID),
-    questionID integer REFERENCES Question(questionID),
+    questionID integer REFERENCES Question(ID),
     answer varchar (1000)
     );
 
@@ -55,7 +47,6 @@ GRANT SELECT ON Answer TO PUBLIC;
 INSERT INTO Person(email) VALUES ('me@calvin.edu');
 INSERT INTO Person(email, name) VALUES ('dch26@students.calvin.edu', 'David Heynen');
 INSERT INTO Person(email, name) VALUES ('dog@students.calvin.edu', 'Dogbreath');
-insert into person (email, password,name) Values ('psd23@students.calvin.edu','good night', 'paul');
 
 INSERT INTO PointOfInterest(latitude, longitude, radius, name, info, imageURL)
 VALUES (30.34, 50.20, 20, 'Whiskey Pond', 
@@ -74,6 +65,3 @@ INSERT INTO Answer(personID, questionID) VALUES (1, 2);
 INSERT INTO Answer VALUES (2, 2, 'In 1995, it fell and removed several neighboring trees.');
 INSERT INTO Answer VALUES (3, 1, 'Great Blue Heron often feeds here.');
 INSERT INTO Answer VALUES (3, 2, 'The gap allows more sunlight to reach the forest floor.');
-
-
-select * from person

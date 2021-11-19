@@ -25,7 +25,7 @@ router.get("/questionsatpoint/:pointid", readQuestionsAtPoint);
 
 router.get("/answers", readAnswers);
 router.get("/answers/:questionid", readAnswersForQuestion);
-router.get("/answers/:questionid/:personid", readPersonsAnswersForQuestion);
+router.get("/answers/:personid/:questionid", readPersonsAnswersForQuestion);
 router.get("/answersforperson/:personid", readPersonsAnswers);
 
 app.use(router);

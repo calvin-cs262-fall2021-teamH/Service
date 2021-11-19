@@ -17,7 +17,16 @@ const router = express.Router();
 router.use(express.json());
 
 router.get("/", readHelloMessage);
-router.get("/pointsofinterest", readPointsOfInterest);
+router.get("/pointsOfInterest", readPointsOfInterest);
+
+router.get("/questions", readQuestions);
+router.get("/questions/:id", readQuestion);
+router.get("/questionsAtPoint/:pointId", readQuestionsAtPoint);
+
+router.get("/answers", readAnswers);
+router.get("/answers/:questionId", readAnswersForQuestion);
+router.get("/answers/:personId/:questionId", readPersonsAnswersForQuestion);
+router.get("/answersForPerson/:personId", readPersonsAnswers);
 
 app.use(router);
 app.use(errorHandler);
@@ -45,7 +54,82 @@ function readHelloMessage(req, res) {
 }
 
 function readPointsOfInterest(req, res, next) {
-    db.many("SELECT * FROM pointofinterest")
+    db.many("SELECT * FROM PointOfInterest")
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readQuestions(req, res, next) {
+    db.many("SELECT * FROM Question")
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
+
+function readQuestion(req, res, next) {
+    db.oneOrNone(
+"SELECT pointID, question FROM Question WHERE ID = ${id}", req.params)
+        .then(data => {
+            returnDataOr404(res, data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readQuestionsAtPoint(req, res, next) {
+    db.manyOrNone(
+"SELECT * FROM Question WHERE Question.pointID = ${pointId}", req.params)
+        .then(data => {
+            returnDataOr404(res, data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readAnswers(req, res, next) {
+    db.manyOrNone("SELECT * FROM Answer")
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readAnswersForQuestion(req, res, next) {
+    db.manyOrNone(
+"SELECT personID, answer FROM answer WHERE questionID = ${questionId}", req.params)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readPersonsAnswersForQuestion(req, res, next) {
+    db.manyOrNone(
+"SELECT answer FROM Answer WHERE personID = ${personId} AND questionID = ${questionId}", req.params)
+        .then(data => {
+            returnDataOr404(res, data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readPersonsAnswers(req, res, next) {
+    db.manyOrNone(
+"SELECT questionID, answer FROM Answer WHERE personID = ${personId}", req.params)
         .then(data => {
             res.send(data);
         })

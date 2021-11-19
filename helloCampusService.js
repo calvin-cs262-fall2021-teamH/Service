@@ -17,16 +17,16 @@ const router = express.Router();
 router.use(express.json());
 
 router.get("/", readHelloMessage);
-router.get("/pointsofinterest", readPointsOfInterest);
+router.get("/pointsOfInterest", readPointsOfInterest);
 
 router.get("/questions", readQuestions);
 router.get("/questions/:id", readQuestion);
-router.get("/questionsatpoint/:pointid", readQuestionsAtPoint);
+router.get("/questionsAtPoint/:pointId", readQuestionsAtPoint);
 
 router.get("/answers", readAnswers);
-router.get("/answers/:questionid", readAnswersForQuestion);
-router.get("/answers/:personid/:questionid", readPersonsAnswersForQuestion);
-router.get("/answersforperson/:personid", readPersonsAnswers);
+router.get("/answers/:questionId", readAnswersForQuestion);
+router.get("/answers/:personId/:questionId", readPersonsAnswersForQuestion);
+router.get("/answersForPerson/:personId", readPersonsAnswers);
 
 app.use(router);
 app.use(errorHandler);
@@ -54,7 +54,7 @@ function readHelloMessage(req, res) {
 }
 
 function readPointsOfInterest(req, res, next) {
-    db.many("SELECT * FROM pointofinterest")
+    db.many("SELECT * FROM PointOfInterest")
         .then(data => {
             res.send(data);
         })
@@ -64,7 +64,7 @@ function readPointsOfInterest(req, res, next) {
 }
 
 function readQuestions(req, res, next) {
-    db.many("SELECT * FROM question")
+    db.many("SELECT * FROM Question")
         .then(data => {
             res.send(data);
         })
@@ -75,7 +75,7 @@ function readQuestions(req, res, next) {
 
 function readQuestion(req, res, next) {
     db.oneOrNone(
-"SELECT * FROM question WHERE question.id = ${id}", req.params)
+"SELECT * FROM Question WHERE Question.ID = ${id}", req.params)
         .then(data => {
             returnDataOr404(res, data);
         })
@@ -86,7 +86,7 @@ function readQuestion(req, res, next) {
 
 function readQuestionsAtPoint(req, res, next) {
     db.manyOrNone(
-"SELECT * FROM question WHERE question.pointid = ${pointid}", req.params)
+"SELECT * FROM Question WHERE Question.pointID = ${pointId}", req.params)
         .then(data => {
             returnDataOr404(res, data);
         })
@@ -96,7 +96,7 @@ function readQuestionsAtPoint(req, res, next) {
 }
 
 function readAnswers(req, res, next) {
-    db.manyOrNone("SELECT * FROM answer")
+    db.manyOrNone("SELECT * FROM Answer")
         .then(data => {
             res.send(data);
         })
@@ -107,7 +107,7 @@ function readAnswers(req, res, next) {
 
 function readAnswersForQuestion(req, res, next) {
     db.manyOrNone(
-"SELECT personid, answer FROM answer WHERE answer.questionid = ${questionid}", req.params)
+"SELECT personID, answer FROM answer WHERE answer.questionID = ${questionId}", req.params)
         .then(data => {
             res.send(data);
         })
@@ -118,7 +118,7 @@ function readAnswersForQuestion(req, res, next) {
 
 function readPersonsAnswersForQuestion(req, res, next) {
     db.manyOrNone(
-"SELECT answer FROM answer WHERE answer.personid = ${personid} AND answer.questionid = ${questionid}", req.params)
+"SELECT answer FROM Answer WHERE Answer.personID = ${personId} AND Answer.questionID = ${questionId}", req.params)
         .then(data => {
             returnDataOr404(res, data);
         })
@@ -129,7 +129,7 @@ function readPersonsAnswersForQuestion(req, res, next) {
 
 function readPersonsAnswers(req, res, next) {
     db.manyOrNone(
-"SELECT questionid, answer FROM answer WHERE answer.personid = ${personid}", req.params)
+"SELECT questionID, answer FROM Answer WHERE Answer.personID = ${personId}", req.params)
         .then(data => {
             res.send(data);
         })

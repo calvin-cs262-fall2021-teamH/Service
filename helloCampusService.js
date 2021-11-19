@@ -140,7 +140,7 @@ function readPersonsAnswers(req, res, next) {
 }
 
 function createAnswer(req, res, next) {
-    db.one('INSERT INTO Answer(personID, questionID, answer) VALUES (${personId}, ${questionId}, ${answer}) RETURNING questionID', req.body)
+    db.one('INSERT INTO Answer(personID, questionID, answer) VALUES (${personID}, ${questionID}, ${answer}) RETURNING questionID', req.body)
         .then(data => {
             res.send(data);
         })

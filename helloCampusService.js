@@ -88,6 +88,7 @@ function readQuestionsAtPoint(req, res, next) {
     db.many(
 "SELECT * FROM question WHERE question.pointid = ${pointid}", req.params)
         .then(data => {
+            console.log(data);
             returnDataOr404(res, data);
         })
         .catch(err => {

@@ -120,7 +120,7 @@ function readPersonsAnswersForQuestion(req, res, next) {
     db.manyOrNone(
 "SELECT answer FROM answer WHERE answer.personid = ${personid} AND answer.questionid = ${questionid}", req.params)
         .then(data => {
-            res.send(res, data);
+            returnDataOr404(res, data);
         })
         .catch(err => {
             next(err);

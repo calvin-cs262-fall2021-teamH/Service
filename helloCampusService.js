@@ -75,9 +75,7 @@ function readQuestions(req, res, next) {
 
 function readQuestion(req, res, next) {
     db.oneOrNone(
-"SELECT *\
-FROM question\
-WHERE question.id = ${id}", req.params)
+"SELECT * FROM question WHERE question.id = ${id}", req.params)
         .then(data => {
             returnDataOr404(res, data);
         })
@@ -88,9 +86,7 @@ WHERE question.id = ${id}", req.params)
 
 function readQuestionsAtPoint(req, res, next) {
     db.many(
-"SELECT *\
-FROM question\
-WHERE question.pointid = ${pointid}", req.params)
+"SELECT * FROM question WHERE question.pointid = ${pointid}", req.params)
         .then(data => {
             res.send(data);
         })

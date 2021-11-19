@@ -19,6 +19,15 @@ router.use(express.json());
 router.get("/", readHelloMessage);
 router.get("/pointsofinterest", readPointsOfInterest);
 
+router.get("/questions", readQuestions);
+router.get("/questions/:id", readQuestion);
+router.get("/questionsatpoint/:pointid", readQuestionsAtPoint);
+
+router.get("/answers", readAnswers);
+router.get("/answers/:questionid", readAnswersForQuestion);
+router.get("/answers/:questionid/:personid", readPersonsAnswersForQuestion);
+router.get("/answersforperson/:personid", readPersonsAnswers);
+
 app.use(router);
 app.use(errorHandler);
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -46,6 +55,42 @@ function readHelloMessage(req, res) {
 
 function readPointsOfInterest(req, res, next) {
     db.many("SELECT * FROM pointofinterest")
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readQuestions(req, res, next) {
+    db.many("SELECT * FROM question")
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
+
+function readQuestion(req, res, next) {
+    db.oneOrNone(
+"SELECT *\
+FROM question\
+WHERE question.id = ${id}", req.params)
+        .then(data => {
+            returnDataOr404(res, data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readQuestionsAtPoint(req, res, next) {
+    db.many(
+"SELECT *\
+FROM question\
+WHERE question.pointid = ${pointid}", req.params)
         .then(data => {
             res.send(data);
         })

@@ -54,14 +54,14 @@ VALUES (42.932583143988886,
         15,
         'Whiskey Pond',
         'This secluded pond is fed by a seep on the edge. It is home to ducks, frogs, and plants like Buttonbush, Duckweed, and the tiniest vascular plant in Michigan, water meal. Watch for the Great Blue Heron that often feeds here.',
-        'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/connect_points_to_dataservice/point_assets/WhiskeyPond.png');
+        'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/main/point_assets/WhiskeyPond.png');
 INSERT INTO PointOfInterest(latitude, longitude, radius, name, info, imageURL)
 VALUES (42.93374267151409,
         -85.58030280488913,
         15,
         'Crown Gap',
         'In 1995, this large maple tree fell, removing branches from several neighboring trees. The result was a large hole in the canopy, or a crown gap. The gap allows more sunlight to reach the forest floor, encouraging growth of seedlings. Eventually one or two of the seedlings you see now will out-compete the others and will fill the canopy gap.',
-        'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/connect_points_to_dataservice/point_assets/CrownGap.png');
+        'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/main/point_assets/CrownGap.png');
 
 INSERT INTO Question(pointID, question) VALUES (1, 'What is something you learned about Whiskey Pond?');
 INSERT INTO Question(pointID, question) VALUES (2, 'What is something you learned about Crown Gap?');

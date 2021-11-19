@@ -27,6 +27,7 @@ router.get("/answers", readAnswers);
 router.get("/answers/:questionId", readAnswersForQuestion);
 router.get("/answers/:personId/:questionId", readPersonsAnswersForQuestion);
 router.get("/answersForPerson/:personId", readPersonsAnswers);
+router.post("/answers", createAnswer);
 
 app.use(router);
 app.use(errorHandler);
@@ -136,4 +137,14 @@ function readPersonsAnswers(req, res, next) {
         .catch(err => {
             next(err);
         })
+}
+
+function createAnswer(req, res, next) {
+    db.one('INSERT INTO Answer(personID, questionID, answer) VALUES (${personId}, ${questionId}, ${answer}) RETURNING questionID', req.body)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
 }

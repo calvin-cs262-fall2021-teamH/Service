@@ -23,10 +23,10 @@ router.get("/questions", readQuestions);
 router.get("/questions/:id", readQuestion);
 router.get("/questionsatpoint/:pointid", readQuestionsAtPoint);
 
-// router.get("/answers", readAnswers);
-// router.get("/answers/:questionid", readAnswersForQuestion);
-// router.get("/answers/:questionid/:personid", readPersonsAnswersForQuestion);
-// router.get("/answersforperson/:personid", readPersonsAnswers);
+router.get("/answers", readAnswers);
+router.get("/answers/:questionid", readAnswersForQuestion);
+router.get("/answers/:questionid/:personid", readPersonsAnswersForQuestion);
+router.get("/answersforperson/:personid", readPersonsAnswers);
 
 app.use(router);
 app.use(errorHandler);
@@ -89,6 +89,49 @@ function readQuestionsAtPoint(req, res, next) {
 "SELECT * FROM question WHERE question.pointid = ${pointid}", req.params)
         .then(data => {
             returnDataOr404(res, data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readAnswers(req, res, next) {
+    db.manyOrNone("SELECT * FROM answer")
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readAnswersForQuestion(req, res, next) {
+    db.manyOrNone(
+"SELECT personid, answer FROM answer WHERE answer.questionid = ${questionid}", req.params)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readPersonsAnswersForQuestion(req, res, next) {
+    db.manyOrNone(
+"SELECT answer FROM answer WHERE answer.personid = ${personid} AND answer.questionid = ${questionid}", req.params)
+        .then(data => {
+            res.send(res, data);
+        })
+        .catch(err => {
+            next(err);
+        })
+}
+
+function readPersonsAnswers(req, res, next) {
+    db.manyOrNone(
+"SELECT questionid, answer FROM answer WHERE answer.personid = ${personid}", req.params)
+        .then(data => {
+            res.send(data);
         })
         .catch(err => {
             next(err);

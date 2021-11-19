@@ -75,7 +75,7 @@ function readQuestions(req, res, next) {
 
 function readQuestion(req, res, next) {
     db.oneOrNone(
-"SELECT * FROM Question WHERE Question.ID = ${id}", req.params)
+"SELECT pointID, question FROM Question WHERE ID = ${id}", req.params)
         .then(data => {
             returnDataOr404(res, data);
         })
@@ -107,7 +107,7 @@ function readAnswers(req, res, next) {
 
 function readAnswersForQuestion(req, res, next) {
     db.manyOrNone(
-"SELECT personID, answer FROM answer WHERE answer.questionID = ${questionId}", req.params)
+"SELECT personID, answer FROM answer WHERE questionID = ${questionId}", req.params)
         .then(data => {
             res.send(data);
         })
@@ -118,7 +118,7 @@ function readAnswersForQuestion(req, res, next) {
 
 function readPersonsAnswersForQuestion(req, res, next) {
     db.manyOrNone(
-"SELECT answer FROM Answer WHERE Answer.personID = ${personId} AND Answer.questionID = ${questionId}", req.params)
+"SELECT answer FROM Answer WHERE personID = ${personId} AND questionID = ${questionId}", req.params)
         .then(data => {
             returnDataOr404(res, data);
         })
@@ -129,7 +129,7 @@ function readPersonsAnswersForQuestion(req, res, next) {
 
 function readPersonsAnswers(req, res, next) {
     db.manyOrNone(
-"SELECT questionID, answer FROM Answer WHERE Answer.personID = ${personId}", req.params)
+"SELECT questionID, answer FROM Answer WHERE personID = ${personId}", req.params)
         .then(data => {
             res.send(data);
         })

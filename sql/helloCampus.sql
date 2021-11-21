@@ -63,8 +63,13 @@ VALUES (42.93374267151409,
         'In 1995, this large maple tree fell, removing branches from several neighboring trees. The result was a large hole in the canopy, or a crown gap. The gap allows more sunlight to reach the forest floor, encouraging growth of seedlings. Eventually one or two of the seedlings you see now will out-compete the others and will fill the canopy gap.',
         'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/main/point_assets/CrownGap.png');
 
-INSERT INTO Question(pointID, question) VALUES (1, 'What is something you learned about Whiskey Pond?');
+INSERT INTO Question(pointID, question) VALUES (1, 'What are some primary producers in this area?');
+INSERT INTO Question(pointID, question) VALUES (1, 'What are some primary consumers in this area? If you see none, what might you expect to see?');
+INSERT INTO Question(pointID, question) VALUES (1, 'What are some secondary consumers in this area? If you see none, what might you expect to see?');
 INSERT INTO Question(pointID, question) VALUES (2, 'What is something you learned about Crown Gap?');
+INSERT INTO Question(PointID, question) VALUES (3, 'What is something you learned about this location?');
+INSERT INTO Question(PointID, question) VALUES (3, 'What is a crazy fact about this area?');
+INSERT INTO Question(PointID, question) VALUES (3, 'Any more observations?');
 
 INSERT INTO Answer VALUES (2, 1, 'It is home to ducks, frogs, and plants.');
 INSERT INTO Answer(personID, questionID) VALUES (1, 2);

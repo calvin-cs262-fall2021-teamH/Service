@@ -22,6 +22,7 @@ router.get("/pointsOfInterest", readPointsOfInterest);
 router.get("/questions", readQuestions);
 router.get("/questions/:id", readQuestion);
 router.get("/questionsAtPoint/:pointId", readQuestionsAtPoint);
+router.post("/questions", createQuestion);
 
 router.get("/answers", readAnswers);
 router.get("/answers/:questionId", readAnswersForQuestion);
@@ -142,6 +143,17 @@ function readPersonsAnswers(req, res, next) {
 function createAnswer(req, res, next) {
     db.one(
 "INSERT INTO Answer(personID, questionID, answer) VALUES (${personID}, ${questionID}, ${answer}) RETURNING questionID", req.body)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
+
+function createQuestion(req, res, next) {
+    db.one(
+"INSERT INTO Question(ID, pointID, question) VALUES (${ID}, ${pointID}, ${question}) RETURNING ID", req.body)
         .then(data => {
             res.send(data);
         })

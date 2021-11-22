@@ -153,7 +153,7 @@ function createAnswer(req, res, next) {
 
 function createQuestion(req, res, next) {
     db.one(
-"INSERT INTO Question(pointID, question) VALUES (${pointID}, ${question}) RETURNING ID", req.body)
+"INSERT INTO Question(pointID, question) VALUES (${pointID}, ${question})", req.body)
         .then(data => {
             res.send(data);
         })

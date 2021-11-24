@@ -173,7 +173,7 @@ function getUsers(req, res, next) {
 }
 
 function getUserForId(req, res, next) {
-    db.manyOrNone(
+    db.oneOrNone(
 "SELECT * FROM Person WHERE id = ${id}", req.params)
         .then((data) => {
             res.send(data);
@@ -195,7 +195,7 @@ function getUserForName(req, res, next) {
 }
 
 function getUserForEmail(req, res, next) {
-    db.manyOrNone(
+    db.oneOrNone(
 "SELECT * FROM Person WHERE email = ${email}", req.params)
         .then((data) => {
             res.send(data);

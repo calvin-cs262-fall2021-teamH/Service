@@ -35,11 +35,11 @@ https://hello-campus.herokuapp.com/users/:email
 
 POST
 
-https://hello-campus.herokuapp.com/answers/ - takes personID, questionID, answer
+https://hello-campus.herokuapp.com/answers/ - takes `personID`, `questionID`, `answer`
 
-https://hello-campus.herokuapp.com/questions/ - takes pointID, question
+https://hello-campus.herokuapp.com/questions/ - takes `pointID`, `question`
 
-https://hello-campus.herokuapp.com/users/ - takes name, email
+https://hello-campus.herokuapp.com/users/ - takes `name`, `email`
 
 
 Example POST test with curl to create a user:

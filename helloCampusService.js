@@ -147,7 +147,12 @@ function readPersonsAnswers(req, res, next) {
 
 function createAnswer(req, res, next) {
     db.one(
-"INSERT INTO Answer(personID, questionID, answer) VALUES (${personID}, ${questionID}, ${answer}) RETURNING questionID", req.body)
+"INSERT INTO Answer(personID, questionID, answer) " +
+"VALUES(" +
+"(SELECT Person.ID FROM Person WHERE Person.email = ${email}), " +
+"${questionID}, " + 
+"${answer}) " +
+"RETURNING Answer.questionID;" , req.body)
         .then(data => {
             res.send(data);
         })
@@ -201,7 +206,7 @@ function getUserForEmail(req, res, next) {
 
 function createUser(req, res, next) {
     db.one(
-"INSERT INTO Answer(personID, questionID, answer) VALUES (${personID}, ${questionID}, ${answer}) RETURNING id", req.body)
+"INSERT INTO Person(email, name) VALUES (${email}, ${name}) RETURNING id", req.body)
         .then(data => {
             res.send(data);
         })

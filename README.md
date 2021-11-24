@@ -35,8 +35,14 @@ https://hello-campus.herokuapp.com/users/:email
 
 POST
 
-https://hello-campus.herokuapp.com/answers/ - takes a person ID, a question ID, and an answer value 
+https://hello-campus.herokuapp.com/answers/ - takes `personID`, `questionID`, `answer`
 
-https://hello-campus.herokuapp.com/questions/ - takes a point ID and a question value 
+https://hello-campus.herokuapp.com/questions/ - takes `pointID`, `question`
 
-https://hello-campus.herokuapp.com/users/ - takes a user's name and email address
+https://hello-campus.herokuapp.com/users/ - takes `name`, `email`
+
+
+Example POST test with curl to create a user:
+```
+curl --header 'Content-Type: application/json' --data '{ "pointID": 1, "question": "Why are we here?" }' https://hello-campus.herokuapp.com/questions
+```

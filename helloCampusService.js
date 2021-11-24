@@ -29,6 +29,12 @@ router.get("/answers/:personId/:questionId", readPersonsAnswersForQuestion);
 router.get("/answersForPerson/:personId", readPersonsAnswers);
 router.post("/answers", createAnswer);
 
+router.get("/users", getUsers);
+router.get("/users/:id", getUserForId);
+router.get("/users/:name", getUserForName);
+router.get("/users/:email", getUserForEmail);
+router.post("/users", createUser);
+
 app.use(router);
 app.use(errorHandler);
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -142,6 +148,60 @@ function readPersonsAnswers(req, res, next) {
 function createAnswer(req, res, next) {
     db.one(
 "INSERT INTO Answer(personID, questionID, answer) VALUES (${personID}, ${questionID}, ${answer}) RETURNING questionID", req.body)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
+
+function getUsers(req, res, next) {
+    db.manyOrNone("SELECT * FROM Person")
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            next(err);
+        });
+}
+
+function getUserForId(req, res, next) {
+    db.manyOrNone(
+"SELECT * FROM Person WHERE id = ${id}", req.params)
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            next(err);
+        }); 
+}
+
+function getUserForName(req, res, next) {
+    db.manyOrNone(
+"SELECT * FROM Person WHERE name = ${name}", req.params)
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            next(err);
+        });
+}
+
+function getUserForEmail(req, res, next) {
+    db.manyOrNone(
+"SELECT * FROM Person WHERE email = ${email}", req.params)
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            next(err);
+        });
+}
+
+function createUser(req, res, next) {
+    db.one(
+"INSERT INTO Answer(personID, questionID, answer) VALUES (${personID}, ${questionID}, ${answer}) RETURNING id", req.body)
         .then(data => {
             res.send(data);
         })

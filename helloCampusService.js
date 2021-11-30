@@ -31,9 +31,9 @@ router.get("/answersForPerson/:personId", readPersonsAnswers);
 router.post("/answers", createAnswer);
 
 router.get("/users", getUsers);
-router.get("/users/:id", getUserForId);
-router.get("/users/:name", getUserForName);
-router.get("/users/:email", getUserForEmail);
+router.get("/userById/:id", getUserForId);
+router.get("/usersByName/:name", getUserForName);
+router.get("/usersByEmail/:email", getUserForEmail);
 router.post("/users", createUser);
 
 app.use(router);

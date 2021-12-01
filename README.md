@@ -26,11 +26,11 @@ https://hello-campus.herokuapp.com/answersForPerson/:personId
 
 https://hello-campus.herokuapp.com/users/
 
-https://hello-campus.herokuapp.com/users/:id
+https://hello-campus.herokuapp.com/userById/:id
 
-https://hello-campus.herokuapp.com/users/:name
+https://hello-campus.herokuapp.com/usersByName/:name
 
-https://hello-campus.herokuapp.com/users/:email
+https://hello-campus.herokuapp.com/usersByEmail/:email
 
 
 POST

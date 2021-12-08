@@ -18,7 +18,7 @@ router.use(express.json());
 
 router.get("/", readHelloMessage);
 router.get("/pointsOfInterest", readPointsOfInterest);
-router.delete("/pointOfInterest", deletePointOfInterest);
+router.delete("/pointOfInterest/:id", deletePointOfInterest);
 
 router.get("/questions", readQuestions);
 router.get("/questions/:id", readQuestion);

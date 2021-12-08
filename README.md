@@ -32,6 +32,12 @@ https://hello-campus.herokuapp.com/usersByName/:name
 
 https://hello-campus.herokuapp.com/usersByEmail/:email
 
+https://hello-campus.herokuapp.com/allStudentUsers/
+
+https://hello-campus.herokuapp.com/allProfessorUsers/
+
+https://hello-campus.herokuapp.com/allGuestUsers/
+
 
 POST
 

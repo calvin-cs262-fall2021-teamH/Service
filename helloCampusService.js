@@ -19,6 +19,7 @@ router.use(express.json());
 router.get("/", readHelloMessage);
 router.get("/pointsOfInterest", readPointsOfInterest);
 router.delete("/pointOfInterest/:id", deletePointOfInterest);
+router.post("/pointsOfInterest", createPointOfInterest);
 
 router.get("/questions", readQuestions);
 router.get("/questions/:id", readQuestion);
@@ -75,6 +76,19 @@ function readPointsOfInterest(req, res, next) {
         .catch(err => {
             next(err);
         })
+}
+
+function createPointOfInterest(req, res, next) {
+    db.one(
+"INSERT INTO PointOfInterest(latitude, longitude, radius, name, info, imageURL) " +
+"VALUES(${latitude}, ${longitude}, ${radius}, ${name}, ${info}, ${imageURL}) " +
+"RETURNING ID" , req.body)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
 }
 
 function readQuestions(req, res, next) {

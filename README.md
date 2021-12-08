@@ -47,6 +47,8 @@ https://hello-campus.herokuapp.com/questions/ - takes `pointID`, `question`
 
 https://hello-campus.herokuapp.com/users/ - takes `name`, `email`
 
+https://hello-campus.herokuapp.com/pointsOfInterest/ - takes `latitude`, `longitude`, `radius`, `name`, `info`, `imageURL`
+
 
 Example POST test with curl to create a user:
 ```

@@ -235,8 +235,6 @@ function createQuestion(req, res, next) {
 
 function deleteQuestion(req, res, next) {
     db.one(
-function deleteQuestion(req, res, next) {
-    db.one(
 "DELETE FROM Question WHERE ID = ${id} RETURNING ID", req.params)
         .then(data => {
             res.send(data);
@@ -248,7 +246,7 @@ function deleteQuestion(req, res, next) {
 
 function deletePointOfInterest(req, res, next) {
     db.one(
-"DELETE FROM PointOfInterest WHERE ID = ${id}", req.params)
+"DELETE FROM PointOfInterest WHERE ID = ${id} RETURNING ID", req.params)
         .then(data => {
             res.send(data);
         })

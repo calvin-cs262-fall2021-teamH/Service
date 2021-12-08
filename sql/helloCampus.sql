@@ -14,8 +14,7 @@ CREATE TABLE Person (
     email varchar(50),
     name varchar(50),
     isStudent boolean,
-    isProfessor boolean,
-    isGuest boolean
+    isProfessor boolean
     );
 
 CREATE TABLE PointOfInterest (

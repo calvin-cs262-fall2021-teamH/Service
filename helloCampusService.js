@@ -32,6 +32,7 @@ router.get("/answers/:questionId", readAnswersForQuestion);
 router.get("/answers/:personId/:questionId", readPersonsAnswersForQuestion);
 router.get("/answersForPerson/:personId", readPersonsAnswers);
 router.post("/answers", createAnswer);
+router.put("/updateAnswer", updateAnswer);
 
 router.get("/users", getUsers);
 router.get("/userById/:id", getUserForId);
@@ -174,6 +175,20 @@ function createAnswer(req, res, next) {
 "${questionID}, " + 
 "${answer}) " +
 "RETURNING Answer.questionID;" , req.body)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
+
+function updateAnswer(req, res, next) {
+    db.oneOrNone(
+"UPDATE Answer " +
+"SET answer = ${answer} " +
+"WHERE personID = ${personID} AND questionID = ${questionID} " +
+"RETURNING personID, questionID;" , req.body)
         .then(data => {
             res.send(data);
         })

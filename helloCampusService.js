@@ -18,11 +18,13 @@ router.use(express.json());
 
 router.get("/", readHelloMessage);
 router.get("/pointsOfInterest", readPointsOfInterest);
+router.delete("/pointOfInterest", deletePointOfInterest);
 
 router.get("/questions", readQuestions);
 router.get("/questions/:id", readQuestion);
 router.get("/questionsAtPoint/:pointId", readQuestionsAtPoint);
 router.post("/questions", createQuestion);
+router.delete("/questions/:id", deleteQuestion);
 
 router.get("/answers", readAnswers);
 router.get("/answers/:questionId", readAnswersForQuestion);
@@ -219,6 +221,28 @@ function createUser(req, res, next) {
 function createQuestion(req, res, next) {
     db.one(
 "INSERT INTO Question(pointID, question) VALUES (${pointID}, ${question}) RETURNING pointID", req.body)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
+
+function deleteQuestion(req, res, next) {
+    db.one(
+"DELETE FROM Question WHERE ID = ${id}", req.params)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
+
+function deletePointOfInterest(req, res, next) {
+    db.one(
+"DELETE FROM PointOfInterest WHERE ID = ${id}", req.params)
         .then(data => {
             res.send(data);
         })

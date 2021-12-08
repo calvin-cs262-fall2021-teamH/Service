@@ -39,6 +39,11 @@ https://hello-campus.herokuapp.com/allProfessorUsers/
 https://hello-campus.herokuapp.com/allGuestUsers/
 
 
+PUT
+
+https://hello-campus.herokuapp.com/updateAnswer/ - takes `personID`, `questionID`, `answer`; returns `personID` and `questionID` of updated answer
+
+
 POST
 
 https://hello-campus.herokuapp.com/answers/ - takes `personID`, `questionID`, `answer`

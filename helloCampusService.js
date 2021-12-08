@@ -36,6 +36,10 @@ router.get("/usersByName/:name", getUserForName);
 router.get("/usersByEmail/:email", getUserForEmail);
 router.post("/users", createUser);
 
+router.get("/allStudentUsers", getStudentUsers);
+router.get("/allProfessorUsers", getProfessorUsers);
+router.get("/allGuestUsers", getGuestUsers);
+
 app.use(router);
 app.use(errorHandler);
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -223,6 +227,39 @@ function createQuestion(req, res, next) {
             res.send(data);
         })
         .catch(err => {
+            next(err);
+        });
+}
+
+function getStudentUsers(req, res, next) {
+    db.manyOrNone(
+"SELECT * FROM Person WHERE isStudent")
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            next(err);
+        });
+}
+
+function getProfessorUsers(req, res, next) {
+    db.manyOrNone(
+"SELECT * FROM Person WHERE isProfessor")
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            next(err);
+        });
+}
+
+function getGuestUsers(req, res, next) {
+    db.manyOrNone(
+"SELECT * FROM Person WHERE NOT isStudent and NOT isProfessor")
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
             next(err);
         });
 }

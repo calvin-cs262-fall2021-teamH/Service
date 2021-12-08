@@ -12,7 +12,10 @@ DROP TABLE IF EXISTS PointOfInterest;
 CREATE TABLE Person (
     ID SERIAL PRIMARY KEY,
     email varchar(50),
-    name varchar(50)
+    name varchar(50),
+    isStudent boolean,
+    isProfessor boolean,
+    isGuest boolean
     );
 
 CREATE TABLE PointOfInterest (
@@ -43,11 +46,6 @@ GRANT SELECT ON PointOfInterest TO PUBLIC;
 GRANT SELECT ON Question TO PUBLIC;
 GRANT SELECT ON Answer TO PUBLIC;
 
--- Add sample records.
-INSERT INTO Person(email) VALUES ('me@calvin.edu');
-INSERT INTO Person(email, name) VALUES ('dch26@students.calvin.edu', 'David Heynen');
-INSERT INTO Person(email, name) VALUES ('dog@students.calvin.edu', 'Dogbreath');
-
 INSERT INTO PointOfInterest(latitude, longitude, radius, name, info, imageURL)
 VALUES (42.932583143988886,
         -85.58309647938191,
@@ -62,6 +60,34 @@ VALUES (42.93374267151409,
         'Crown Gap',
         'In 1995, this large maple tree fell, removing branches from several neighboring trees. The result was a large hole in the canopy, or a crown gap. The gap allows more sunlight to reach the forest floor, encouraging growth of seedlings. Eventually one or two of the seedlings you see now will out-compete the others and will fill the canopy gap.',
         'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/main/point_assets/CrownGap.png');
+INSERT INTO PointOfInterest(latitude, longitude, radius, name, info, imageURL)
+VALUES (42.931119807199075,
+        -85.58910687175235,
+        20,
+        'Lab',
+        'lkdsufpoeiufapoidusapf',
+        'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/main/point_assets/CrownGap.png');
+INSERT INTO PointOfInterest(latitude, longitude, radius, name, info, imageURL)
+VALUES (42.93183174900448,
+        -85.5875208072886,
+        20,
+        'Room',
+        'eeeee',
+        'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/main/point_assets/CrownGap.png');
+INSERT INTO PointOfInterest(latitude, longitude, radius, name, info, imageURL)
+VALUES (42.85929819243669,
+        -85.44681698840668,
+        30,
+        'Test Location',
+        'This is a test location! Neat!',
+        'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/main/point_assets/CrownGap.png');
+INSERT INTO PointOfInterest(latitude, longitude, radius, name, info, imageURL)
+VALUES (42.93189842388794,
+        -85.58215893073103,
+        12,
+        'Bunker Interpretive Center',
+        'The BIC provides approximately 5,000 square feet of space which serves as a home base for programs, a study center for the university community, and an educational resource for the general public.',
+        'https://raw.githubusercontent.com/calvin-cs262-fall2021-teamH/Service/main/point_assets/bunker.png');
 
 INSERT INTO Question(pointID, question) VALUES (1, 'What are some primary producers in this area?');
 INSERT INTO Question(pointID, question) VALUES (1, 'What are some primary consumers in this area? If you see none, what might you expect to see?');
@@ -70,9 +96,12 @@ INSERT INTO Question(pointID, question) VALUES (2, 'What is something you learne
 INSERT INTO Question(PointID, question) VALUES (3, 'What is something you learned about this location?');
 INSERT INTO Question(PointID, question) VALUES (3, 'What is a crazy fact about this area?');
 INSERT INTO Question(PointID, question) VALUES (3, 'Any more observations?');
-
-INSERT INTO Answer VALUES (2, 1, 'It is home to ducks, frogs, and plants.');
-INSERT INTO Answer(personID, questionID) VALUES (1, 2);
-INSERT INTO Answer VALUES (2, 2, 'In 1995, it fell and removed several neighboring trees.');
-INSERT INTO Answer VALUES (3, 1, 'Great Blue Heron often feeds here.');
-INSERT INTO Answer VALUES (3, 2, 'The gap allows more sunlight to reach the forest floor.');
+INSERT INTO Question(PointID, question) VALUES (4, 'What is something you learned about this location?');
+INSERT INTO Question(PointID, question) VALUES (4, 'What is a crazy fact about this area?');
+INSERT INTO Question(PointID, question) VALUES (4, 'Any more observations?');
+INSERT INTO Question(PointID, question) VALUES (5, 'What is something you learned about this location?');
+INSERT INTO Question(PointID, question) VALUES (5, 'What is a crazy fact about this area?');
+INSERT INTO Question(PointID, question) VALUES (5, 'Any more observations?');
+INSERT INTO Question(PointID, question) VALUES (6, 'What is something you learned about this location?');
+INSERT INTO Question(PointID, question) VALUES (6, 'What is a crazy fact about this area?');
+INSERT INTO Question(PointID, question) VALUES (6, 'Any more observations?');

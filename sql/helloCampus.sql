@@ -13,8 +13,8 @@ CREATE TABLE Person (
     ID SERIAL PRIMARY KEY,
     email varchar(50),
     name varchar(50),
-    isStudent boolean,
-    isProfessor boolean
+    isStudent boolean NOT NULL DEFAULT false,
+    isProfessor boolean NOT NULL DEFAULT false
     );
 
 CREATE TABLE PointOfInterest (

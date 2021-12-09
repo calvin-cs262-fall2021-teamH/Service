@@ -39,6 +39,7 @@ router.get("/userById/:id", getUserForId);
 router.get("/usersByName/:name", getUserForName);
 router.get("/usersByEmail/:email", getUserForEmail);
 router.post("/users", createUser);
+router.put("/updateStudentStatus",updateUser);
 
 router.get("/allStudentUsers", getStudentUsers);
 router.get("/allProfessorUsers", getProfessorUsers);
@@ -189,6 +190,20 @@ function updateAnswer(req, res, next) {
 "SET answer = ${answer} " +
 "WHERE personID = ${personID} AND questionID = ${questionID} " +
 "RETURNING personID, questionID;" , req.body)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            next(err);
+        });
+}
+
+function updateUser(req, res, next) {
+    db.oneOrNone(
+    "UPDATE person " +
+    "SET isstudent = ${isstudent}" +
+    "WHERE email = ${email}" +
+    "RETURNING email, isstudent;" , req.body)
         .then(data => {
             res.send(data);
         })
